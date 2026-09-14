@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Novara Global Limited</title>
+<meta name="description" content="Get in touch with Novara Global Limited about export readiness, compliance advisory, market access or Novara Academy training.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6" cy="19" r="2.6" stroke="#b3862f" stroke-width="1.4"/>
+        <circle cx="20" cy="7" r="2.6" stroke="#b3862f" stroke-width="1.4"/>
+        <circle cx="13" cy="13" r="2.6" stroke="#eae6da" stroke-width="1.4"/>
+        <path d="M8.2 17.4L11 15" stroke="#b3862f" stroke-width="1.3"/>
+        <path d="M15.4 11L18 8.6" stroke="#b3862f" stroke-width="1.3"/>
+      </svg>
+      Novara Global
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="academy.html">Academy</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="assessment.html" class="btn btn-ghost-ink">Assess export readiness</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-header">
+    <div class="wrap">
+      <div class="eyebrow" style="color:var(--gold);">Get in touch</div>
+      <h1>Let's work together</h1>
+      <p class="lede">Whether you're preparing to enter an international market, navigating regulatory requirements, developing a trade programme, or strengthening institutional capacity, Novara Global can help you move from complexity to action.</p>
+    </div>
+  </section>
+
+  <section class="section section-raised">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="contact-info-item">
+          <h4>Location</h4>
+          <p>Nairobi, Kenya — serving Africa &amp; international markets</p>
+        </div>
+        <div class="contact-info-item">
+          <h4>Email</h4>
+          <p>info@novaraglobal.com</p>
+        </div>
+        <div class="contact-info-item">
+          <h4>Response time</h4>
+          <p>We typically reply within two business days.</p>
+        </div>
+      </div>
+
+      <div>
+        <form id="contactForm" novalidate>
+          <div class="field" data-field="name">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" required>
+            <div class="field-error">Please enter your name.</div>
+          </div>
+          <div class="field" data-field="organization">
+            <label for="f-org">Organization</label>
+            <input id="f-org" name="organization" type="text">
+          </div>
+          <div class="field" data-field="email">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" required>
+            <div class="field-error">Please enter a valid email address.</div>
+          </div>
+          <div class="field">
+            <label for="f-service">Service required</label>
+            <select id="f-service" name="service">
+              <option>Export readiness &amp; compliance</option>
+              <option>SPS compliance advisory</option>
+              <option>Market access advisory</option>
+              <option>Policy &amp; regulatory advisory</option>
+              <option>Stakeholder engagement</option>
+              <option>Novara Academy training</option>
+              <option>Other / not sure yet</option>
+            </select>
+          </div>
+          <div class="field" data-field="message">
+            <label for="f-message">Tell us about your project</label>
+            <textarea id="f-message" name="message" required></textarea>
+            <div class="field-error">Please tell us a little about your project.</div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Submit enquiry</button>
+          <p class="form-note">This form sends directly to the Novara Global team — it does not sign you up for anything else.</p>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <h3>Enquiry received</h3>
+          <p>Thank you for reaching out. Someone from the Novara Global team will respond to you shortly.</p>
+        </div>
+
+        <div class="form-error" id="formError">
+          <h3>Something went wrong</h3>
+          <p>Your enquiry could not be sent. Please try again, or email us directly at info@novaraglobal.com.</p>
+          <button class="btn btn-ghost" id="tryAgainBtn" type="button" style="margin-top:16px;">Try again</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Novara Global Limited</span>
+    <span>Nairobi, Kenya · Serving Africa &amp; international markets</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+
+    // Pre-fill service from a query parameter, e.g. contact.html?service=SPS+compliance
+    var params = new URLSearchParams(window.location.search);
+    var svcParam = params.get('service');
+    if(svcParam){
+      var select = document.getElementById('f-service');
+      var match = Array.from(select.options).find(function(o){
+        return o.value.toLowerCase() === svcParam.toLowerCase();
+      });
+      if(match) select.value = match.value;
+    }
+
+    var form = document.getElementById('contactForm');
+    var successEl = document.getElementById('formSuccess');
+    var errorEl = document.getElementById('formError');
+    var submitBtn = document.getElementById('submitBtn');
+
+    // -------------------------------------------------------------
+    // FORM ENDPOINT
+    // -------------------------------------------------------------
+    // This form posts to Formspree (https://formspree.io), a free
+    // form-backend service that emails submissions to you — no
+    // server required. To make this live:
+    //   1. Create a free account at https://formspree.io
+    //   2. Create a new form and copy its endpoint, e.g.
+    //      https://formspree.io/f/abcdwxyz
+    //   3. Paste it below in place of FORM_ENDPOINT.
+    // Until you do, submissions will not actually be delivered.
+    var FORM_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID";
+
+    function setInvalid(fieldName, invalid){
+      var el = form.querySelector('[data-field="' + fieldName + '"]');
+      if(el) el.classList.toggle('invalid', invalid);
+    }
+
+    function validate(){
+      var valid = true;
+      var name = form.elements['name'].value.trim();
+      var email = form.elements['email'].value.trim();
+      var message = form.elements['message'].value.trim();
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      setInvalid('name', name.length === 0);
+      setInvalid('email', !emailOk);
+      setInvalid('message', message.length === 0);
+
+      if(name.length === 0 || !emailOk || message.length === 0) valid = false;
+      return valid;
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!validate()) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      var data = new FormData(form);
+
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response){
+        if(response.ok){
+          form.style.display = 'none';
+          successEl.style.display = 'block';
+        } else {
+          throw new Error('Submission failed');
+        }
+      }).catch(function(){
+        form.style.display = 'none';
+        errorEl.style.display = 'block';
+      }).finally(function(){
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit enquiry';
+      });
+    });
+
+    var tryAgainBtn = document.getElementById('tryAgainBtn');
+    if(tryAgainBtn){
+      tryAgainBtn.addEventListener('click', function(){
+        errorEl.style.display = 'none';
+        form.style.display = 'block';
+      });
+    }
+  });
+</script>
+</body>
+</html>
